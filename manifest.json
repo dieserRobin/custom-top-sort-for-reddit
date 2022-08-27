@@ -1,37 +1,28 @@
 {
+  "manifest_version": 3,
+  "name": "Custom Reddit Top Sort",
+  "version": "1.0.0",
 
-  "manifest_version": 2,
-  "name": "Custom top sort for Reddit",
-  "version": "0.1.2",
-
-  "description": "Allow Reddit's top sort to use other time durations than the default ones.",
+  "description": "Allow Reddit's top sort to use other time durations than the default ones. (Fork of: arvidsandin/custom-top-sort-for-reddit)",
 
   "icons": {
-    "48": "icon/icon_48.png",
-    "96": "icon/icon_96.png",
-    "128": "icon/icon_128_padding.png"
+    "16": "icon/icon-16.png",
+    "48": "icon/icon-48.png",
+    "128": "icon/icon-128.png"
   },
 
-  "permissions": [
-    "*://*.reddit.com/*",
-    "storage"
-  ],
+  "permissions": ["*://*.reddit.com/*", "storage"],
 
   "content_scripts": [
     {
-      "matches": ["*://*.reddit.com/*"],
-      "js": ["oldReddit.js", "newReddit.js", "main.js"]
+      "js": ["oldReddit.js", "newReddit.js", "main.js"],
+      "matches": ["*://*.reddit.com/*"]
     }
   ],
 
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
 
-  "options_ui": {
-    "page": "options/index.html",
-    "open_in_tab": true
-  }
-
+  "options_page": "options/index.html"
 }
