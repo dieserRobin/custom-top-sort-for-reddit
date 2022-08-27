@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="index.css">
-  </head>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="index.css" />
+    </head>
 
-  <body>
-    <h2>Select the sortings you want available on reddit</h2>
-    <div id="container">
-      <div id="list">
-        <div class="row_container" id="row_container"></div>
-        <p id="add_sorting">+</p>
-        <div id="saveButtonContainer">
-          <button type="button" name="save" id="saveButton">Save</button><span id="checkmark">✔</span>
+    <body>
+        <h2>Select the sortings you want available on reddit</h2>
+        <div id="container">
+            <div id="list">
+                <div class="row_container" id="row_container"></div>
+                <p id="add_sorting">+</p>
+                <div id="saveButtonContainer">
+                    <button type="button" name="save" id="saveButton">
+                        Save</button
+                    ><span id="checkmark">✔</span>
+                </div>
+                <div id="note">
+                    <span
+                        >Fork of
+                        <a
+                            href="https://github.com/arvidsandin/custom-top-sort-for-reddit"
+                            >arvidsandin/custom-top-sort-for-reddit</a
+                        ></span
+                    >
+                </div>
+            </div>
         </div>
-        <div id="note">
-          <p id="limitations"><span>🛈</span>Reddit redesign limitations</p>
-          <div id="hoverInformation">
-            If you're using the reddit redesign, you can only sort within the following ranges: 1–24 hours, 1–30 days, 1–4 weeks, 1–12 months and 1+ years. Setting for example &quot;36 hours&quot; will only filter posts newer than 24 hours and you migth be better off using &quot;2 days&quot; instead.<br>(If you don't know what reddit redesign is, you're probably using it.)
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <script src="index.js"></script>
-
-  </body>
-
+        <script src="index.js"></script>
+    </body>
 </html>
