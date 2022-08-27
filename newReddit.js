@@ -1,146 +1,184 @@
 class New {
   constructor(listOfSortings) {
     const parent = this;
-    var customize = document.createElement('a');
+    var customize = document.createElement("a");
     customize.innerText = "customize";
     customize.href = "javascript:void(0)";
-    customize.classList = "_39Glgtoolpdt4PIzcnjPSW _3LwUIE7yX7CZQKmD2L87vf _3LjUrsRA9MkUFLGB6ZCWaX _1oYEKCssGFjqxQ9jJMNj5G";
-    customize.addEventListener('click', (event) =>{
+    customize.classList =
+      "_39Glgtoolpdt4PIzcnjPSW _3LwUIE7yX7CZQKmD2L87vf _3LjUrsRA9MkUFLGB6ZCWaX _1oYEKCssGFjqxQ9jJMNj5G";
+    customize.addEventListener("click", (event) => {
       event.preventDefault();
-      (chrome ? chrome : browser).runtime.sendMessage({"action": "openOptionsPage"});
+      (chrome ? chrome : browser).runtime.sendMessage({
+        action: "openOptionsPage",
+      });
     });
 
-
-    var listButton = document.getElementsByClassName('_29FQ-HlVE3aNu0iB8mO-ey GzkzdrqG-NjAYH7eKJan4')[0];
-    listButton.addEventListener('click', function() {
+    var listButton = document.getElementsByClassName(
+      "_29FQ-HlVE3aNu0iB8mO-ey GzkzdrqG-NjAYH7eKJan4"
+    )[0];
+    listButton.addEventListener("click", function () {
       setTimeout(function () {
-        var dropDown = document.getElementsByClassName('_2uYY-KeuYHKiwl-9aF0UiL Sgi9lgQUrox4tW9Q75iif')[0];
-        dropDown.innerHTML = '';
+        var dropDown = document.getElementsByClassName(
+          "_2uYY-KeuYHKiwl-9aF0UiL Sgi9lgQUrox4tW9Q75iif"
+        )[0];
+        dropDown.innerHTML = "";
         for (var sorting of listOfSortings) {
-          dropDown.appendChild(parent.generateSortingLink(sorting.filterNumber, sorting.filterWord));
+          dropDown.appendChild(
+            parent.generateSortingLink(sorting.filterNumber, sorting.filterWord)
+          );
         }
         dropDown.appendChild(customize);
       }, 200);
       setTimeout(function () {
-        var dropDown = document.getElementsByClassName('_2uYY-KeuYHKiwl-9aF0UiL Sgi9lgQUrox4tW9Q75iif')[0];
-        dropDown.innerHTML = '';
+        var dropDown = document.getElementsByClassName(
+          "_2uYY-KeuYHKiwl-9aF0UiL Sgi9lgQUrox4tW9Q75iif"
+        )[0];
+        dropDown.innerHTML = "";
         for (var sorting of listOfSortings) {
-          dropDown.appendChild(parent.generateSortingLink(sorting.filterNumber, sorting.filterWord));
+          dropDown.appendChild(
+            parent.generateSortingLink(sorting.filterNumber, sorting.filterWord)
+          );
         }
         dropDown.appendChild(customize);
       }, 1000);
     });
   }
 
-  enforceSelectedSorting(){
-    var filterNumber = parseInt(sessionStorage.getItem('filterNumber'));
-    var filterTimespan = sessionStorage.getItem('filterTimespan');
+  enforceSelectedSorting() {
+    var filterNumber = parseInt(sessionStorage.getItem("filterNumber"));
+    var filterTimespan = sessionStorage.getItem("filterTimespan");
     this.removePostsOlderThan(filterNumber, filterTimespan);
-    switch(filterTimespan){
-      case 'years':
+    switch (filterTimespan) {
+      case "years":
         break;
-      case 'months':
-        this.removePostsOlderThan(0, 'years');
+      case "months":
+        this.removePostsOlderThan(0, "years");
         break;
-      case 'weeks':
-        this.removePostsOlderThan(0, 'years');
-        this.removePostsOlderThan(0, 'months');
-        this.removePostsOlderThan(filterNumber*7, 'days');
+      case "weeks":
+        this.removePostsOlderThan(0, "years");
+        this.removePostsOlderThan(0, "months");
+        this.removePostsOlderThan(filterNumber * 7, "days");
         break;
-      case 'days':
-        this.removePostsOlderThan(0, 'years');
-        this.removePostsOlderThan(0, 'months');
+      case "days":
+        this.removePostsOlderThan(0, "years");
+        this.removePostsOlderThan(0, "months");
         break;
-      case 'hours':
-        this.removePostsOlderThan(0, 'years');
-        this.removePostsOlderThan(0, 'months');
-        this.removePostsOlderThan(0, 'days');
+      case "hours":
+        this.removePostsOlderThan(0, "years");
+        this.removePostsOlderThan(0, "months");
+        this.removePostsOlderThan(0, "days");
         break;
       default:
         break;
     }
-    if (filterNumber != 0 && filterTimespan != 'default') {
-      this.changeTextOfSelectedSorting('last ' + filterNumber + ' ' + filterTimespan);
+    if (filterNumber != 0 && filterTimespan != "default") {
+      this.changeTextOfSelectedSorting(
+        "last " + filterNumber + " " + filterTimespan
+      );
     }
   }
 
-  generateSortingLink(filterNumber, filterWord){
-    var element = document.createElement('a');
-    element.classList.add('_39Glgtoolpdt4PIzcnjPSW', '_3LwUIE7yX7CZQKmD2L87vf', '_3LjUrsRA9MkUFLGB6ZCWaX', '_1oYEKCssGFjqxQ9jJMNj5G');
-    element.setAttribute('role', 'menuitem');
+  generateSortingLink(filterNumber, filterWord) {
+    var element = document.createElement("a");
+    element.classList.add(
+      "_39Glgtoolpdt4PIzcnjPSW",
+      "_3LwUIE7yX7CZQKmD2L87vf",
+      "_3LjUrsRA9MkUFLGB6ZCWaX",
+      "_1oYEKCssGFjqxQ9jJMNj5G"
+    );
+    element.setAttribute("role", "menuitem");
 
-    var url = window.location.href + '/';
-    var indexOfSignificantURLContent = url.search('/top/') + 5;
+    var url = window.location.href + "/";
+    var indexOfSignificantURLContent = url.search("/top/") + 5;
     url = url.substring(0, indexOfSignificantURLContent);
-    url += '?t=';
-    if (filterWord == 'all') {
+    url += "?t=";
+    if (filterWord == "all") {
       url += filterWord;
-    }
-    else if (filterNumber == 1) {
+    } else if (filterNumber == 1) {
       url += filterWord.substring(0, filterWord.length - 1);
-    }
-    else {
-      var times = ['hours', 'days', 'weeks', 'months', 'years', 'alls'];
+    } else {
+      var times = ["hours", "days", "weeks", "months", "years", "alls"];
+      var spans = { hours: 24, days: 7, weeks: 4, months: 12, years: 1 };
       var index = times.indexOf(filterWord);
+
+      var n = filterNumber;
+      var span = spans[filterWord];
+
+      while (n > 0) {
+        if (n > span) index++;
+        n -= span;
+        var next =
+          spans[
+            Object.keys(spans)[
+              Object.keys(spans).findIndex((s) => spans[s] === span) + 1
+            ]
+          ];
+        span = span * next;
+      }
+
       var nextSorting = times[index + 1];
-      url += nextSorting.substring(0, nextSorting.length -1);
+      url += nextSorting.substring(0, nextSorting.length - 1);
     }
 
-    element.setAttribute('href', url);
-    element.addEventListener('click', ()=>{
-      sessionStorage.setItem('filterNumber', filterNumber);
-      sessionStorage.setItem('filterTimespan', filterWord);
-    })
+    element.setAttribute("href", url);
+    element.addEventListener("click", () => {
+      sessionStorage.setItem("filterNumber", filterNumber);
+      sessionStorage.setItem("filterTimespan", filterWord);
+    });
 
-    var text = document.createElement('span');
-    text.classList.add('_2-cXnP74241WI7fpcpfPmg');
+    var text = document.createElement("span");
+    text.classList.add("_2-cXnP74241WI7fpcpfPmg");
     if (filterWord == "all") {
       text.innerText = filterWord;
-    }
-    else if (filterNumber != 1) {
-      text.innerText = 'last ';
-      text.innerText += filterNumber + ' ';
+    } else if (filterNumber != 1) {
+      text.innerText = "last ";
+      text.innerText += filterNumber + " ";
       text.innerText += filterWord;
-    }
-    else {
-      text.innerText = 'last ';
-      text.innerText += filterWord.substring(0, filterWord.length -1);
+    } else {
+      text.innerText = "last ";
+      text.innerText += filterWord.substring(0, filterWord.length - 1);
     }
 
     element.appendChild(text);
     return element;
   }
 
-  changeTextOfSelectedSorting(newText){
-    var selectedSorting = document.getElementsByClassName('_2-cXnP74241WI7fpcpfPmg');
+  changeTextOfSelectedSorting(newText) {
+    var selectedSorting = document.getElementsByClassName(
+      "_2-cXnP74241WI7fpcpfPmg"
+    );
     for (var i = 0; i < selectedSorting.length; i++) {
       selectedSorting[i].innerText = newText;
     }
   }
 
-  removePostsOlderThan(filterNumber, filterWord){
-    var posts = document.getElementsByClassName('Post');
-    for (var i = posts.length-1; i >= 0; i--) {
+  removePostsOlderThan(filterNumber, filterWord) {
+    var posts = document.getElementsByClassName("Post");
+    for (var i = posts.length - 1; i >= 0; i--) {
       var time = posts[i].querySelector('[data-click-id="timestamp"]');
       if (time == undefined) {
         return;
       }
       time = time.innerHTML;
-      var words = time.split(' ');
+      var words = time.split(" ");
       var postNumber = parseInt(words[0]);
       var postWord = words[1];
-      if (postNumber >= filterNumber &&
+      if (
+        postNumber >= filterNumber &&
         (this.stringMatches(postWord, filterWord) ||
-        this.stringMatches(postWord, filterWord.substring(0, filterWord.length - 1))))
-        {
+          this.stringMatches(
+            postWord,
+            filterWord.substring(0, filterWord.length - 1)
+          ))
+      ) {
         posts[i].remove();
-        }
+      }
     }
   }
 
   stringMatches(a, b) {
-    return typeof a === 'string' && typeof b === 'string'
-    ? a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
-    : a === b;
+    return typeof a === "string" && typeof b === "string"
+      ? a.localeCompare(b, undefined, { sensitivity: "accent" }) === 0
+      : a === b;
   }
 }
